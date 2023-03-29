@@ -3,6 +3,7 @@
 GNSSlog:  IOS App for GPS Data Logging on Firestore with Flutter.
 
 ![](forReadme/3.png)
+![](forReadme/4.png)
 
 ## Installing the Plugins
 
