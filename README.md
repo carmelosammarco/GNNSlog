@@ -5,7 +5,7 @@ GNSSlog:  IOS App for GPS Data Logging on Firestore with Flutter.
 ![](forReadme/3.png)
 ![](forReadme/4.png)
 
-## Installing the Plugins
+## The required plugins:
 
 open_file_folder: **`pubspec.yaml`**:
 
@@ -16,11 +16,11 @@ dependencies:
   cupertino_icons: ^1.0.2
 ```
 
-## Create a Firestore DB:
+## Creation of a Firestore DB:
 
 ### - Follow [the documentation](https://firebase.google.com/docs/firestore/quickstart) to create a new Firestore project.
 
-### - Add this rules to your database:
+### - Add rules to the DB created:
 
 ```
 // Allow read/write access to all users under any conditions
@@ -40,7 +40,7 @@ In **Query builder** I selected "Collections" as scope and then as path "/locati
 
 ![](forReadme/2.png)
 
-In fact in my code the configuration parameters for "BackgroundGeolocationFirebase" are:
+In fact, in my dart code the configuration parameters for "BackgroundGeolocationFirebase" are:
 
 ```
 BackgroundGeolocationFirebase.configure(BackgroundGeolocationFirebaseConfig(
@@ -85,19 +85,25 @@ From your Firebase Console, copy your downloaded **Google-Services-Info.plist** 
             "level": [Float],
             "is_charging": [Boolean]
         },
-        "timestamp": [ISO-8601 UTC], // eg:  "2015-05-05T04:31:54.123Z"
+        "timestamp": [ISO-8601 UTC],  // eg:  "2015-05-05T04:31:54.123Z"
         "uuid":      [String],       // <-- Universally unique identifier
         "event"      [String],       // <-- motionchange|geofence|heartbeat
-        "is_moving": [Boolean],      // <-- The motion-state when location was recorded (@deprecated; use #event)
-        "is_heartbeat: [Boolean],    // <-- If this location was recorded during heartbeat mode.
+        "is_moving": [Boolean],      // <-- The motion-state when location was recorded (@deprecated; use #event) 
+        "is_heartbeat: [Boolean],    // <-- If this location was recorded during heartbeat mode.    
         "odometer": [Float/meters]
     }
 }
 ```
 
-I used then this as the general data schema to build the DB structure. I was able to import the data direclty in my Firestore DB without any function implementation.
+I used then this as the general data schema to follow in building the DB structure. I was able to import the data direclty in my Firestore DB without any function implementation as you will see below if interested. At this point you should be able to run the project in a virtual device (as for my case) or crete an official bundle with:
 
-Anyway From the documentation you should implement (**AS I SAID DID NOT DO IT**) your own [Firebase Functions](https://firebase.google.com/docs/functions) to manipulate the incoming data in your collection as desired. For example:
+```
+flutter run
+```
+
+## Additional information:
+
+From the documentation you should implement (**AS I SAID BEFORE I DID NOT DO IT**) your own [Firebase Functions](https://firebase.google.com/docs/functions) to manipulate the incoming data in your collection as desired. For example:
 
 ```typescript
 import * as functions from 'firebase-functions';
@@ -149,10 +155,9 @@ exports.createGeofence = functions.firestore
       extras: location.extras,
     });
 });
-
 ```
 
-### Configuration Options
+### Configuration Options:
 
 #### `@param {String} locationsCollection [locations]`
 
@@ -191,7 +196,6 @@ BackgroundGeolocationFirebase.configure(BackgroundGeolocationFirebaseConfig(
 ));
 
 ```
-
 
 #### `@param {Boolean} updateSingleDocument [false]`
 
